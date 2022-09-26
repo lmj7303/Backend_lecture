@@ -1,3 +1,4 @@
+-- Active: 1663919800731@@127.0.0.1@3306@world
 /*
  * 데이터 조작 언어(DML: Data Manipulation Language)
  */
