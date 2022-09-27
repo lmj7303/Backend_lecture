@@ -12,9 +12,10 @@ module.exports = {
         });
         return conn;
     },
-    getList: function(callback) {
+    getgroupList: function(callback) {
         const conn = this.getConnection();
-        const sql = `SELECT * FROM tigers WHERE isDeleted=0;`;
+        const sql = `SELECT gid,name,date_format(debut,'%Y-%m-%d') as debutDate, song.title FROM girl_group 
+                        JOIN song ON girl_group.hit_song_id=song.sid;`
         conn.query(sql, (err, rows, fields) => {
             if (err)
                 throw err;
@@ -22,10 +23,23 @@ module.exports = {
         });
         conn.end();
     },
-    insertPlayer: function(params, callback) {
+
+    getsongList: function(callback) {
         const conn = this.getConnection();
-        const sql = `INSERT INTO tigers (player, backNo, position)
-                            VALUES (?, ?, ?);`;
+        const sql = `SELECT sid,title,lyrics,date_format(debut,'%Y-%m-%d') as debutDate, song.title FROM girl_group 
+                        JOIN song ON girl_group.hit_song_id=song.sid;`
+        conn.query(sql, (err, rows, fields) => {
+            if (err)
+                throw err;
+            callback(rows);      
+        });
+        conn.end();
+    },
+
+    insertgruop: function(params, callback) {
+        const conn = this.getConnection();
+        const sql = `INSERT INTO girl_group (gid, name, debutDate, title)
+                            VALUES (?, ?, ?, ?);`;
         conn.query(sql, params, (err, fields) => {
             if (err)
                 throw err;
@@ -33,7 +47,7 @@ module.exports = {
         });
         conn.end();
     },
-    getPlayer: function(params, callback) {
+    getgroup: function(params, callback) {
         const conn = this.getConnection();
         const sql = `SELECT * FROM tigers WHERE id=? and isDeleted=0;`;
         conn.query(sql, params, (err, rows, fields) => {
@@ -64,27 +78,4 @@ module.exports = {
         });
         conn.end();
     },
-    getPlayerByPosition: function(params,callback){//필요한 파라메터
-        const conn=this.getConnection();
-        const sql=`SELECT * FROM tigers WHERE position=?;`;
-        conn.query(sql,params,(err,rows,fields)=>{
-            if(err)
-                throw err;
-            callback(rows); //콜백함수
-        });
-        conn.end();
-    },
-    getPlayerOrderByBackNo: function(){//ASC-0,DESC-1
-        const conn=this.getConnection();
-        let sql=`SELECT * FROM tigers WHERE isDeleted=0
-                        ORDER BY backNo`;
-        sql+=(order==1)?'DESC;':'';
-        conn.query(sql,(err,rows,fields)=>{
-            if(err)
-                throw err;
-            callback(rows); //콜백함수
-        });
-        conn.end();
-
-    }
 }
