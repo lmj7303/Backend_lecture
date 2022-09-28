@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>EJS Static</title>
 </head>
 <body>
-    <h1>static image</h1>
+    <h1>Static file</h1>
+    <h3>parameter로 받은 데이터: <%= data %></h3>
     <hr>
-    <img src="../public/고양이.jpg" alt="고양이">
-    <img src="../public/img/개.jpg" alt="개">
-    <audio src="../public/mp3_sample.mp3" control>오디오</audio>
-    <video src="../public/mp4_sample.mp4" control>비디오</video>
-    
+    <img src="/고양이.jpg" alt="고양이">
+    <img src="/img/개.jpg" alt="개">
+    <audio src="/mp3_sample.mp3" controls></audio>
 </body>
 </html>
