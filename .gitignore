@@ -1,6 +1,7 @@
 #Lee wrote
 tmp/
 mysql.json
+public/
 
 # Logs
 logs
