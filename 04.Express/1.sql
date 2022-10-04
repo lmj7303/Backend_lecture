@@ -1,1 +1,1 @@
-SELECT * FROM tigers;
+SELECT player FROM tigers;
